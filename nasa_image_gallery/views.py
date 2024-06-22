@@ -14,15 +14,21 @@ def index_page(request):
 def getAllImagesAndFavouriteList(request):
     images = []
     favourite_list = []
+    
+    images.append(services_nasa_image_gallery.getAllImages)
+    favourite_list.append(services_nasa_image_gallery.getAllFavouritesByUser)
 
     return images, favourite_list
 
 # función principal de la galería.
 def home(request):
+    getAllImagesAndFavouriteList(list)
     # llama a la función auxiliar getAllImagesAndFavouriteList() y obtiene 2 listados: uno de las imágenes de la API y otro de favoritos por usuario*.
     # (*) este último, solo si se desarrolló el opcional de favoritos; caso contrario, será un listado vacío [].
     images = []
     favourite_list = []
+    images = services_nasa_image_gallery.getAllImages
+    
     return render(request, 'home.html', {'images': images, 'favourite_list': favourite_list} )
 
 
@@ -30,6 +36,11 @@ def home(request):
 def search(request):
     images, favourite_list = getAllImagesAndFavouriteList(request)
     search_msg = request.POST.get('query', '')
+
+    if (search != ""):
+        images = services_nasa_image_gallery.getAllImages(search)
+
+    return render(request, 'home.html', {'images': images, 'favourite_list': favourite_list} )
 
     # si el usuario no ingresó texto alguno, debe refrescar la página; caso contrario, debe filtrar aquellas imágenes que posean el texto de búsqueda.
     pass
