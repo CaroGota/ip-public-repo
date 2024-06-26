@@ -28,6 +28,7 @@ def home(request):
     images = []
     favourite_list = []
     images = services_nasa_image_gallery.getAllImages
+    favourite_list = services_nasa_image_gallery.getAllFavouritesByUser
     
     return render(request, 'home.html', {'images': images, 'favourite_list': favourite_list} )
 
@@ -38,7 +39,7 @@ def search(request):
     search_msg = request.POST.get('query', '')
 
     if (search != ""):
-        images = services_nasa_image_gallery.getAllImages(search)
+        images = services_nasa_image_gallery.getImagesBySearchInputLike(search_msg)
 
     return render(request, 'home.html', {'images': images, 'favourite_list': favourite_list} )
 
